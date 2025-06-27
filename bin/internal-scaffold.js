@@ -7,6 +7,7 @@ const prompt = inquirer.createPromptModule();
 const fs = require('fs');
 const path = require('path');
 const { copyTemplates } = require('../lib/templateUtils');
+const { generateStructure } = require('../lib/structureGenerator');
 
 async function scaffoldProject(options) {
   try {
@@ -42,6 +43,12 @@ async function scaffoldProject(options) {
         message: 'Database:',
         default: config.database,
       },
+      {
+        type: 'input',
+        name: 'architecture',
+        message: 'Architecture pattern:',
+        default: config.architecture || 'layered',
+      },
     ];
 
     const answers = await prompt(questions);
@@ -54,6 +61,10 @@ async function scaffoldProject(options) {
     const projectDir = path.join(process.cwd(), finalConfig.projectName);
 
     await copyTemplates(templateDir, projectDir, finalConfig);
+    await generateStructure({
+      projectName: finalConfig.projectName,
+      architecture: finalConfig.architecture || 'layered'
+    });
     console.log(`\nProject scaffolded at ${projectDir}`);
   } catch (err) {
     console.error(`Initialization failed: ${err.message}`);
