@@ -3,8 +3,31 @@
 
 const { Command } = require('commander');
 const inquirer = require('inquirer');
+const prompt = inquirer.prompt || (inquirer.default && inquirer.default.prompt);
 const fs = require('fs');
 const path = require('path');
+
+async function generateStructure(config) {
+  const baseDir = path.resolve(process.cwd(), config.projectName || 'my-app');
+  const arch = (config.architecture || '').toLowerCase();
+  const structures = {
+    layered: ['controllers', 'services', 'repositories', 'models'],
+    clean: ['domain', 'application', 'infrastructure', 'presentation'],
+  };
+
+  const folders = structures[arch];
+  if (!folders) {
+    console.warn(`Unknown architecture '${config.architecture}'. No structure generated.`);
+    return;
+  }
+
+  await fs.promises.mkdir(baseDir, { recursive: true });
+  for (const folder of folders) {
+    const fullPath = path.join(baseDir, folder);
+    await fs.promises.mkdir(fullPath, { recursive: true });
+    await fs.promises.writeFile(path.join(fullPath, '.gitkeep'), '');
+  }
+}
 
 async function scaffoldProject(options) {
   try {
@@ -40,15 +63,23 @@ async function scaffoldProject(options) {
         message: 'Database:',
         default: config.database,
       },
+      {
+        type: 'list',
+        name: 'architecture',
+        message: 'Architecture pattern:',
+        choices: ['Layered', 'Clean'],
+        default: config.architecture,
+      },
     ];
 
-    const answers = await inquirer.prompt(questions);
+    const answers = await prompt(questions);
     const finalConfig = { ...config, ...answers };
 
     console.log('Scaffolding project with configuration:');
     console.log(JSON.stringify(finalConfig, null, 2));
 
-    // TODO: generate files and directories based on finalConfig
+    await generateStructure(finalConfig);
+    console.log('Project structure generated.');
   } catch (err) {
     console.error(`Initialization failed: ${err.message}`);
     process.exit(1);
@@ -72,7 +103,11 @@ async function main() {
   await program.parseAsync(process.argv);
 }
 
-main().catch((err) => {
-  console.error(`CLI failed: ${err.message}`);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch((err) => {
+    console.error(`CLI failed: ${err.message}`);
+    process.exit(1);
+  });
+}
+
+module.exports = { generateStructure };
