@@ -8,14 +8,20 @@ const fs = require('fs');
 const path = require('path');
 const { copyTemplates } = require('../lib/templateUtils');
 const { generateStructure } = require('../lib/structureGenerator');
+const { validateConfig } = require('../lib/configValidator');
 
 async function scaffoldProject(options) {
   try {
     let config = {};
+    if (options.preset) {
+      const presetPath = path.join(__dirname, '..', 'presets', `${options.preset}.json`);
+      const presetRaw = await fs.promises.readFile(presetPath, 'utf-8');
+      config = JSON.parse(presetRaw);
+    }
     if (options.config) {
       const configPath = path.resolve(process.cwd(), options.config);
       const raw = await fs.promises.readFile(configPath, 'utf-8');
-      config = JSON.parse(raw);
+      config = { ...config, ...JSON.parse(raw) };
     }
 
     const questions = [
@@ -52,7 +58,7 @@ async function scaffoldProject(options) {
     ];
 
     const answers = await prompt(questions);
-    const finalConfig = { ...config, ...answers };
+    const finalConfig = validateConfig({ ...config, ...answers });
 
     console.log('Scaffolding project with configuration:');
     console.log(JSON.stringify(finalConfig, null, 2));
@@ -63,7 +69,7 @@ async function scaffoldProject(options) {
     await copyTemplates(templateDir, projectDir, finalConfig);
     await generateStructure({
       projectName: finalConfig.projectName,
-      architecture: finalConfig.architecture || 'layered'
+      architecture: finalConfig.architecture
     });
     console.log(`\nProject scaffolded at ${projectDir}`);
   } catch (err) {
@@ -84,6 +90,7 @@ async function main() {
     .command('init')
     .description('Initialize a new project')
     .option('-c, --config <path>', 'Path to config JSON')
+    .option('-p, --preset <name>', 'Preset name to load')
     .action(scaffoldProject);
 
   await program.parseAsync(process.argv);

@@ -1,0 +1,7 @@
+{
+  "projectName": "blazor-dashboard",
+  "backend": "dotnet",
+  "frontend": "blazor",
+  "database": "sqlserver",
+  "architecture": "clean"
+}

@@ -1,0 +1,7 @@
+{
+  "projectName": "react-admin-app",
+  "backend": "node",
+  "frontend": "react",
+  "database": "postgres",
+  "architecture": "layered"
+}
