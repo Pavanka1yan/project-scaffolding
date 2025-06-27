@@ -21,7 +21,7 @@ This tool helps teams quickly set up new projects by automating:
 ## 🧠 Features
 
 - 📋 CLI-based or Web UI setup
-- 📁 Auto-generated folder structures
+- 📁 Auto-generated folder structures (via `generateStructure`)
 - 🔐 Auth (MSAL, OAuth2, custom)
 - 🗃️ DB setup (SQL Server, Postgres, MongoDB)
 - 🧱 Architecture patterns (Layered, DDD, Microservice-ready)
