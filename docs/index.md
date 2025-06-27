@@ -35,6 +35,7 @@ This tool helps teams quickly set up new projects by automating:
 - 🗃️ DB setup (SQL Server, Postgres, MongoDB)
 - 🧱 Architecture patterns (Layered, DDD, Microservice-ready)
 - ⚙️ Optional services (Hangfire, Swagger, Health checks, etc.)
+- 🌐 Typed HTTP clients with Refit ([example](./refit-http-clients.md))
 - 📦 Package.json, Dockerfile, `.editorconfig`, `.gitignore`
 - 🚀 Azure DevOps/GitHub Actions CI templates
 - 🧪 Testing setup (xUnit, Jest, Playwright)
@@ -99,8 +100,12 @@ Define your default setup in `scaffold.config.json`:
   "auth": "MSAL",
   "enableAuth": true,
   "enableEf": true,
+  "enableHttpClients": true,
   "architecture": "Clean",
-  "features": ["Hangfire", "Swagger", "HealthCheck"]
+  "features": ["Hangfire", "Swagger", "HealthCheck"],
+  "serviceUrls": {
+    "MyApi": "https://example.com"
+  }
 }
 ```
 

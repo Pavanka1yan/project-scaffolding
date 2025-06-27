@@ -12,6 +12,7 @@ describe('validateConfig', () => {
     expect(result.architecture).toBe('layered');
     expect(result.enableAuth).toBe(false);
     expect(result.enableEf).toBe(false);
+    expect(result.enableHttpClients).toBe(false);
   });
 
   it('throws if required fields missing', () => {

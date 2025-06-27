@@ -7,6 +7,7 @@ export interface ScaffoldConfig {
   preset?: string;
   enableAuth?: boolean;
   enableEf?: boolean;
+  enableHttpClients?: boolean;
 }
 
 export interface ValidatedConfig {
@@ -18,6 +19,7 @@ export interface ValidatedConfig {
   preset?: string;
   enableAuth: boolean;
   enableEf: boolean;
+  enableHttpClients: boolean;
 }
 
 const allowedArchitectures = ["clean", "layered"];
@@ -55,5 +57,6 @@ export function validateConfig(config: ScaffoldConfig): ValidatedConfig {
     preset: config.preset,
     enableAuth: config.enableAuth ?? false,
     enableEf: config.enableEf ?? false,
+    enableHttpClients: config.enableHttpClients ?? false,
   };
 }
