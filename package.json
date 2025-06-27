@@ -1,0 +1,12 @@
+{
+  "name": "internal-scaffold",
+  "version": "0.1.0",
+  "description": "Internal project scaffolding tool",
+  "bin": {
+    "internal-scaffold": "./bin/internal-scaffold.js"
+  },
+  "dependencies": {
+    "commander": "^11.0.0",
+    "inquirer": "^9.0.0"
+  }
+}
