@@ -108,6 +108,8 @@ Define your default setup in `scaffold.config.json`:
   }
 }
 ```
+Any optional flag (such as `enableAuth` or `enableEf`) removes all related files and packages when set to `false`. This means, for example, that disabling `enableAuth` leaves out every authentication package and configuration from the generated project.
+
 
 Set the environment variable `REACT_APP_ENABLE_AUTH=true` in the React app to toggle authentication.
 
