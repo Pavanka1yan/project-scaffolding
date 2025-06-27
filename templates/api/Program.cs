@@ -10,6 +10,7 @@ var enableAuth = features.GetValue<bool>("EnableAuth");
 var enableEf = features.GetValue<bool>("EnableEf");
 var enableSwagger = features.GetValue<bool>("EnableSwagger");
 var enableCors = features.GetValue<bool>("EnableCors");
+var enableHttpClients = features.GetValue<bool>("EnableHttpClients");
 
 if (enableAuth)
 {
@@ -33,6 +34,12 @@ if (enableEf)
 }
 
 builder.Services.AddControllers();
+
+if (enableHttpClients)
+{
+    builder.Services.AddHttpClient();
+    builder.Services.AddTransient(typeof(IRefitHttpClientService<>), typeof(RefitHttpClientService<>));
+}
 
 if (enableCors)
 {
