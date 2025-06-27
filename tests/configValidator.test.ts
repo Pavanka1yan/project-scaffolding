@@ -10,6 +10,7 @@ describe('validateConfig', () => {
     };
     const result = validateConfig(input);
     expect(result.architecture).toBe('layered');
+    expect(result.enableAuth).toBe(false);
   });
 
   it('throws if required fields missing', () => {

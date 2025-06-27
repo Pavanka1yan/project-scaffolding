@@ -97,10 +97,12 @@ Define your default setup in `scaffold.config.json`:
   "backend": ".NET 8",
   "database": "SQL Server",
   "auth": "MSAL",
+  "enableAuth": true,
   "architecture": "Clean",
   "features": ["Hangfire", "Swagger", "HealthCheck"]
 }
 ```
+Use `REACT_APP_ENABLE_AUTH=true` in the React environment to toggle authentication.
 
 Then run:
 ```bash

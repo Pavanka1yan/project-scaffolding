@@ -55,6 +55,12 @@ async function scaffoldProject(options) {
         message: 'Architecture pattern:',
         default: config.architecture || 'layered',
       },
+      {
+        type: 'confirm',
+        name: 'enableAuth',
+        message: 'Enable Azure AD authentication?',
+        default: config.enableAuth || false,
+      },
     ];
 
     const answers = await prompt(questions);

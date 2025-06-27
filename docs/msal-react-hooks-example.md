@@ -1,6 +1,6 @@
 # Integrating MSAL in React with Hooks
 
-When your `scaffold.config.json` specifies `"auth": "MSAL"` (see lines 82-91 of the root `README.md` for an example config), the generated React app can be configured to authenticate with Azure Active Directory using the `@azure/msal-react` library.
+When your `scaffold.config.json` sets `"enableAuth": true` and `"auth": "MSAL"` (see the config snippet in the README), the generated React app can be configured to authenticate with Azure Active Directory using the `@azure/msal-react` library. The integration is gated by the `REACT_APP_ENABLE_AUTH` environment variable so authentication can be toggled per environment.
 
 Below is a sample integration using React hooks.
 

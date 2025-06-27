@@ -5,6 +5,7 @@ export interface ScaffoldConfig {
   database?: string;
   architecture?: string;
   preset?: string;
+  enableAuth?: boolean;
 }
 
 export interface ValidatedConfig {
@@ -14,6 +15,7 @@ export interface ValidatedConfig {
   database: string;
   architecture: string;
   preset?: string;
+  enableAuth: boolean;
 }
 
 const allowedArchitectures = ["clean", "layered"];
@@ -49,5 +51,6 @@ export function validateConfig(config: ScaffoldConfig): ValidatedConfig {
     database: config.database!,
     architecture,
     preset: config.preset,
+    enableAuth: config.enableAuth ?? false,
   };
 }
