@@ -8,6 +8,8 @@ export interface ScaffoldConfig {
   enableAuth?: boolean;
   enableEf?: boolean;
   enableHttpClients?: boolean;
+  enableSwagger?: boolean;
+  enableCors?: boolean;
 }
 
 export interface ValidatedConfig {
@@ -20,6 +22,8 @@ export interface ValidatedConfig {
   enableAuth: boolean;
   enableEf: boolean;
   enableHttpClients: boolean;
+  enableSwagger: boolean;
+  enableCors: boolean;
 }
 
 const allowedArchitectures = ["clean", "layered"];
@@ -58,5 +62,7 @@ export function validateConfig(config: ScaffoldConfig): ValidatedConfig {
     enableAuth: config.enableAuth ?? false,
     enableEf: config.enableEf ?? false,
     enableHttpClients: config.enableHttpClients ?? false,
+    enableSwagger: config.enableSwagger ?? false,
+    enableCors: config.enableCors ?? false,
   };
 }

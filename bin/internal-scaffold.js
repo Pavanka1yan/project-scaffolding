@@ -67,6 +67,18 @@ async function scaffoldProject(options) {
         message: 'Use EF Core?',
         default: config.enableEf || false,
       },
+      {
+        type: 'confirm',
+        name: 'enableSwagger',
+        message: 'Enable Swagger?',
+        default: config.enableSwagger || false,
+      },
+      {
+        type: 'confirm',
+        name: 'enableCors',
+        message: 'Enable CORS?',
+        default: config.enableCors || false,
+      },
     ];
 
     const answers = await prompt(questions);
@@ -74,12 +86,14 @@ async function scaffoldProject(options) {
 
     let efProvider = '';
     let connectionString = '';
-    if (finalConfig.enableEf) {
-      if (/sql server/i.test(finalConfig.database)) {
-        efProvider = 'UseSqlServer';
+    if (/sql server/i.test(finalConfig.database)) {
+      efProvider = 'UseSqlServer';
+      if (finalConfig.enableEf) {
         connectionString = `Server=localhost;Database=${finalConfig.projectName};Trusted_Connection=True;TrustServerCertificate=True;`;
-      } else if (/postgres/i.test(finalConfig.database)) {
-        efProvider = 'UseNpgsql';
+      }
+    } else if (/postgres/i.test(finalConfig.database)) {
+      efProvider = 'UseNpgsql';
+      if (finalConfig.enableEf) {
         connectionString = `Host=localhost;Database=${finalConfig.projectName};Username=postgres;Password=postgres`;
       }
     }
