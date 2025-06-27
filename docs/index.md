@@ -1,3 +1,12 @@
+---
+title: Internal Project Scaffolding
+---
+
+<style>
+body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 2rem auto; }
+h1, h2, h3 { color: #333; }
+</style>
+
 # Internal Project Scaffolding Tool
 
 [![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://your-username.github.io/project-scaffolding/)
