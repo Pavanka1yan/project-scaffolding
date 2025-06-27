@@ -13,6 +13,8 @@ describe('validateConfig', () => {
     expect(result.enableAuth).toBe(false);
     expect(result.enableEf).toBe(false);
     expect(result.enableHttpClients).toBe(false);
+    expect(result.enableSwagger).toBe(false);
+    expect(result.enableCors).toBe(false);
   });
 
   it('throws if required fields missing', () => {
