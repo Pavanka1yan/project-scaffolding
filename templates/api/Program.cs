@@ -1,13 +1,15 @@
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.Identity.Web;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-
-// Registers EF Core services when enabled
+using Microsoft.Identity.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var enableAuth = builder.Configuration.GetValue<bool>("Features:EnableAuth");
-var enableEf = builder.Configuration.GetValue<bool>("Features:EnableEf");
+var features = builder.Configuration.GetSection("Features");
+var enableAuth = features.GetValue<bool>("EnableAuth");
+var enableEf = features.GetValue<bool>("EnableEf");
+var enableSwagger = features.GetValue<bool>("EnableSwagger");
+var enableCors = features.GetValue<bool>("EnableCors");
 
 if (enableAuth)
 {
@@ -32,7 +34,41 @@ if (enableEf)
 
 builder.Services.AddControllers();
 
+if (enableCors)
+{
+    builder.Services.AddCors(options =>
+    {
+        options.AddDefaultPolicy(policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+    });
+}
+
+if (enableSwagger)
+{
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+}
+
+builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
+
 var app = builder.Build();
+
+app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
+
+if (enableSwagger)
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+if (enableCors)
+{
+    app.UseCors();
+}
 
 if (enableAuth)
 {
@@ -43,3 +79,29 @@ if (enableAuth)
 app.MapControllers();
 
 app.Run();
+
+public class GlobalExceptionHandlingMiddleware
+{
+    private readonly RequestDelegate _next;
+    private readonly ILogger<GlobalExceptionHandlingMiddleware> _logger;
+
+    public GlobalExceptionHandlingMiddleware(RequestDelegate next, ILogger<GlobalExceptionHandlingMiddleware> logger)
+    {
+        _next = next;
+        _logger = logger;
+    }
+
+    public async Task InvokeAsync(HttpContext context)
+    {
+        try
+        {
+            await _next(context);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Unhandled exception");
+            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            await context.Response.WriteAsJsonAsync(new { error = "An unexpected error occurred." });
+        }
+    }
+}
