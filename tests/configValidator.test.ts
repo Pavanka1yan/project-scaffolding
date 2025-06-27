@@ -11,6 +11,7 @@ describe('validateConfig', () => {
     const result = validateConfig(input);
     expect(result.architecture).toBe('layered');
     expect(result.enableAuth).toBe(false);
+    expect(result.enableEf).toBe(false);
   });
 
   it('throws if required fields missing', () => {
