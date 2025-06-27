@@ -89,6 +89,7 @@ Define your default setup in `scaffold.config.json`:
   "database": "SQL Server",
   "auth": "MSAL",
   "enableAuth": true,
+  "enableEf": true,
   "architecture": "Clean",
   "features": ["Hangfire", "Swagger", "HealthCheck"]
 }

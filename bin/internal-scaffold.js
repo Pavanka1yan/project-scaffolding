@@ -61,18 +61,36 @@ async function scaffoldProject(options) {
         message: 'Enable Azure AD authentication?',
         default: config.enableAuth || false,
       },
+      {
+        type: 'confirm',
+        name: 'enableEf',
+        message: 'Use EF Core?',
+        default: config.enableEf || false,
+      },
     ];
 
     const answers = await prompt(questions);
     const finalConfig = validateConfig({ ...config, ...answers });
 
+    let efProvider = '';
+    let connectionString = '';
+    if (finalConfig.enableEf) {
+      if (/sql server/i.test(finalConfig.database)) {
+        efProvider = 'UseSqlServer';
+        connectionString = `Server=localhost;Database=${finalConfig.projectName};Trusted_Connection=True;TrustServerCertificate=True;`;
+      } else if (/postgres/i.test(finalConfig.database)) {
+        efProvider = 'UseNpgsql';
+        connectionString = `Host=localhost;Database=${finalConfig.projectName};Username=postgres;Password=postgres`;
+      }
+    }
+
     console.log('Scaffolding project with configuration:');
-    console.log(JSON.stringify(finalConfig, null, 2));
+    console.log(JSON.stringify({ ...finalConfig, efProvider, connectionString }, null, 2));
 
     const templateDir = path.join(__dirname, '..', 'templates');
     const projectDir = path.join(process.cwd(), finalConfig.projectName);
 
-    await copyTemplates(templateDir, projectDir, finalConfig);
+    await copyTemplates(templateDir, projectDir, { ...finalConfig, efProvider, connectionString });
     await generateStructure({
       projectName: finalConfig.projectName,
       architecture: finalConfig.architecture
