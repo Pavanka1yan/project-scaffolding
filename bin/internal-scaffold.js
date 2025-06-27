@@ -3,8 +3,10 @@
 
 const { Command } = require('commander');
 const inquirer = require('inquirer');
+const prompt = inquirer.createPromptModule();
 const fs = require('fs');
 const path = require('path');
+const { copyTemplates } = require('../lib/templateUtils');
 
 async function scaffoldProject(options) {
   try {
@@ -42,13 +44,17 @@ async function scaffoldProject(options) {
       },
     ];
 
-    const answers = await inquirer.prompt(questions);
+    const answers = await prompt(questions);
     const finalConfig = { ...config, ...answers };
 
     console.log('Scaffolding project with configuration:');
     console.log(JSON.stringify(finalConfig, null, 2));
 
-    // TODO: generate files and directories based on finalConfig
+    const templateDir = path.join(__dirname, '..', 'templates');
+    const projectDir = path.join(process.cwd(), finalConfig.projectName);
+
+    await copyTemplates(templateDir, projectDir, finalConfig);
+    console.log(`\nProject scaffolded at ${projectDir}`);
   } catch (err) {
     console.error(`Initialization failed: ${err.message}`);
     process.exit(1);
