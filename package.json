@@ -5,8 +5,15 @@
   "bin": {
     "internal-scaffold": "./bin/internal-scaffold.js"
   },
+  "scripts": {
+    "update-docs": "ts-node update-docs.ts"
+  },
   "dependencies": {
     "commander": "^11.0.0",
     "inquirer": "^9.0.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
   }
 }
