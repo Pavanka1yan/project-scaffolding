@@ -3,8 +3,8 @@ title: Internal Project Scaffolding
 ---
 
 <style>
-body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 2rem auto; }
-h1, h2, h3 { color: #333; }
+  body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 2rem auto; }
+  h1, h2, h3 { color: #333; }
 </style>
 
 # Internal Project Scaffolding Tool
@@ -30,7 +30,7 @@ This tool helps teams quickly set up new projects by automating:
 ## 🧠 Features
 
 - 📋 CLI-based or Web UI setup
-- 📁 Auto-generated folder structures
+- 📁 Auto-generated folder structures (via `generateStructure`)
 - 🔐 Auth (MSAL, OAuth2, custom)
 - 🗃️ DB setup (SQL Server, Postgres, MongoDB)
 - 🧱 Architecture patterns (Layered, DDD, Microservice-ready)

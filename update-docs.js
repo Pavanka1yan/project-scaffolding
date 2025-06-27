@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'fs';
+const { readFileSync, writeFileSync } = require("fs");
 
 const readme = readFileSync('README.md', 'utf8');
 

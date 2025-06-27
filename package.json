@@ -6,7 +6,7 @@
     "internal-scaffold": "./bin/internal-scaffold.js"
   },
   "scripts": {
-    "update-docs": "ts-node update-docs.ts"
+    "update-docs": "node update-docs.js"
   },
   "dependencies": {
     "commander": "^11.0.0",
