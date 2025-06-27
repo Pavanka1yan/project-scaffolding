@@ -118,6 +118,12 @@ npx internal-scaffold init --config scaffold.config.json
 
 ---
 
+## 📄 GitHub Pages Setup
+
+This repository includes a workflow that publishes the contents of the `docs` directory to GitHub Pages. Make sure Pages is enabled for the repo or set `enablement: true` in `.github/workflows/pages.yml` so the workflow can enable it automatically.
+
+---
+
 ## 🔐 Internal Usage Only
 
 This is an internal tool for rapid scaffolding and prototyping across teams. It is not intended for public use.
