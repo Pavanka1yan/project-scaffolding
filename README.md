@@ -57,6 +57,14 @@ You will be prompted for:
 6. Architecture Pattern
 7. Optional Features
 
+### Option 2: VS Code Extension
+
+1. Install the extension from the `vscode-extension` folder using `vsce package` or by loading it as an extension during development.
+2. Run the command **Create Internal Project** from the command palette.
+3. Follow the interactive prompts to select the backend, frontend, database and optional features.
+4. The extension generates a temporary config file and runs the CLI in a terminal window.
+
+
 ---
 
 ## 🧾 Output Example
@@ -128,7 +136,8 @@ npx internal-scaffold init --config configs/dotnet-react-sqlserver.json
 
 ## 💡 Future Roadmap
 
-- VSCode extension for scaffolding UI
+The repository already ships with a VS Code extension found in `vscode-extension/`.
+Use it for an interactive scaffolding experience directly inside the editor.
 - Plugin system for custom features
 - Enterprise boilerplate templates
 - AI assistant (via Codex) for feature guidance
