@@ -11,6 +11,7 @@ export interface ScaffoldConfig {
   enableHttpClients?: boolean;
   enableSwagger?: boolean;
   enableCors?: boolean;
+  plugins?: string[];
 }
 
 export interface ValidatedConfig {
@@ -26,6 +27,7 @@ export interface ValidatedConfig {
   enableHttpClients: boolean;
   enableSwagger: boolean;
   enableCors: boolean;
+  plugins: string[];
 }
 
 // supported architecture patterns for project generation
@@ -74,5 +76,6 @@ export function validateConfig(config: ScaffoldConfig): ValidatedConfig {
     enableHttpClients: config.enableHttpClients ?? false,
     enableSwagger: config.enableSwagger ?? false,
     enableCors: config.enableCors ?? false,
+    plugins: config.plugins ?? [],
   };
 }
