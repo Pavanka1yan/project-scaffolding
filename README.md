@@ -9,7 +9,7 @@ The Internal Project Scaffolding Tool is designed to bootstrap internal applicat
 This tool helps teams quickly set up new projects by automating:
 - Authentication & Authorization
 - Database integration
-- API layers and routing
+- API layers and routing (REST or GraphQL)
 - UI framework setup (React + Tailwind)
 - CI/CD pipelines
 - Environment configurations
@@ -26,7 +26,9 @@ This tool helps teams quickly set up new projects by automating:
 - 🗃️ DB setup (SQL Server, Postgres, MongoDB)
 - 🧱 Architecture patterns (Layered, DDD, Microservice-ready)
 - ⚙️ Optional services (Hangfire, Swagger, Health checks, etc.)
+- 🌐 REST or GraphQL API templates
 - 🌐 Typed HTTP clients with Refit ([example](docs/refit-http-clients.md))
+- 📖 GraphQL setup ([guide](docs/graphql-dotnet-react.md))
 - 📦 Package.json, Dockerfile, `.editorconfig`, `.gitignore`
 - 🚀 Azure DevOps/GitHub Actions CI templates
 - 🧪 Testing setup (xUnit, Jest, Playwright)
@@ -88,6 +90,7 @@ Define your default setup in `scaffold.config.json`:
   "frontend": "React",
   "backend": ".NET 8",
   "database": "SQL Server",
+  "apiType": "rest",
   "auth": "MSAL",
   "enableAuth": true,
   "enableEf": true,

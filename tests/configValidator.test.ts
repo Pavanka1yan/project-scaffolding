@@ -10,6 +10,7 @@ describe('validateConfig', () => {
     };
     const result = validateConfig(input);
     expect(result.architecture).toBe('layered');
+    expect(result.apiType).toBe('rest');
     expect(result.enableAuth).toBe(false);
     expect(result.enableEf).toBe(false);
     expect(result.enableHttpClients).toBe(false);
@@ -30,5 +31,16 @@ describe('validateConfig', () => {
       architecture: 'wrong'
     };
     expect(() => validateConfig(input)).toThrow('architecture');
+  });
+
+  it('throws for invalid apiType', () => {
+    const input: ScaffoldConfig = {
+      projectName: 'a',
+      backend: 'b',
+      frontend: 'c',
+      database: 'd',
+      apiType: 'soap'
+    };
+    expect(() => validateConfig(input)).toThrow('apiType');
   });
 });

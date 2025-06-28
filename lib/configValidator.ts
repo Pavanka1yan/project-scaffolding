@@ -4,6 +4,7 @@ export interface ScaffoldConfig {
   frontend?: string;
   database?: string;
   architecture?: string;
+  apiType?: string;
   preset?: string;
   enableAuth?: boolean;
   enableEf?: boolean;
@@ -18,6 +19,7 @@ export interface ValidatedConfig {
   frontend: string;
   database: string;
   architecture: string;
+  apiType: string;
   preset?: string;
   enableAuth: boolean;
   enableEf: boolean;
@@ -27,6 +29,7 @@ export interface ValidatedConfig {
 }
 
 const allowedArchitectures = ["clean", "layered"];
+const allowedApiTypes = ["rest", "graphql"];
 
 export function validateConfig(config: ScaffoldConfig): ValidatedConfig {
   const errors: string[] = [];
@@ -48,6 +51,11 @@ export function validateConfig(config: ScaffoldConfig): ValidatedConfig {
     errors.push(`architecture must be one of ${allowedArchitectures.join(', ')}`);
   }
 
+  const apiType = config.apiType || "rest";
+  if (!allowedApiTypes.includes(apiType)) {
+    errors.push(`apiType must be one of ${allowedApiTypes.join(', ')}`);
+  }
+
   if (errors.length) {
     throw new Error("Config validation failed: " + errors.join(", "));
   }
@@ -58,6 +66,7 @@ export function validateConfig(config: ScaffoldConfig): ValidatedConfig {
     frontend: config.frontend!,
     database: config.database!,
     architecture,
+    apiType,
     preset: config.preset,
     enableAuth: config.enableAuth ?? false,
     enableEf: config.enableEf ?? false,
