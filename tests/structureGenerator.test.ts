@@ -17,4 +17,11 @@ describe('generateStructure', () => {
     expect(vol.existsSync(path.join(base, 'src/controllers'))).toBe(true);
     expect(vol.existsSync(path.join(base, 'src/services'))).toBe(true);
   });
+
+  it('creates onion structure', async () => {
+    await generateStructure({ projectName: 'onionProj', architecture: 'onion' });
+    const base = path.resolve(process.cwd(), 'onionProj');
+    expect(vol.existsSync(path.join(base, 'src/domain'))).toBe(true);
+    expect(vol.existsSync(path.join(base, 'src/web'))).toBe(true);
+  });
 });

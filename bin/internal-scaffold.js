@@ -107,10 +107,14 @@ async function scaffoldProject(options) {
     console.log('Scaffolding project with configuration:');
     console.log(JSON.stringify({ ...finalConfig, efProvider, connectionString }, null, 2));
 
-    const templateDir = path.join(__dirname, '..', 'templates');
+    const baseTemplateDir = path.join(__dirname, '..', 'templates');
+    const archTemplateDir = path.join(baseTemplateDir, finalConfig.architecture);
     const projectDir = path.join(process.cwd(), finalConfig.projectName);
 
-    await copyTemplates(templateDir, projectDir, { ...finalConfig, efProvider, connectionString });
+    await copyTemplates(baseTemplateDir, projectDir, { ...finalConfig, efProvider, connectionString });
+    if (fs.existsSync(archTemplateDir)) {
+      await copyTemplates(archTemplateDir, projectDir, { ...finalConfig, efProvider, connectionString });
+    }
     await generateStructure({
       projectName: finalConfig.projectName,
       architecture: finalConfig.architecture
