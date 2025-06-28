@@ -95,6 +95,12 @@ Package the extension using `vsce package` and install the resulting `.vsix` fil
   README.md
 ```
 
+### Verifying your Setup
+
+After running the generated services, open the React UI. The home page shows a
+status checklist by calling the `/status` API endpoint to confirm that features
+like the database connection and authentication are working.
+
 The `configs/` directory contains additional ready‑made configuration files for common combinations of backend, frontend and database.
 
 ---
