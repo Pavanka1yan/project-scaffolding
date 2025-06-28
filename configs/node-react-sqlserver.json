@@ -1,0 +1,11 @@
+{
+  "projectName": "sample-app",
+  "backend": "node",
+  "frontend": "react",
+  "database": "sqlserver",
+  "auth": "OAuth2",
+  "enableAuth": true,
+  "enableEf": false,
+  "enableHttpClients": true,
+  "architecture": "layered"
+}

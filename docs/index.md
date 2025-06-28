@@ -35,7 +35,7 @@ This tool helps teams quickly set up new projects by automating:
 - 🗃️ DB setup (SQL Server, Postgres, MongoDB)
 - 🧱 Architecture patterns (Layered, DDD, Microservice-ready)
 - ⚙️ Optional services (Hangfire, Swagger, Health checks, etc.)
-- 🌐 Typed HTTP clients with Refit ([example](./refit-http-clients.md))
+- 🌐 Typed HTTP clients with Refit ([example](docs/refit-http-clients.md))
 - 📦 Package.json, Dockerfile, `.editorconfig`, `.gitignore`
 - 🚀 Azure DevOps/GitHub Actions CI templates
 - 🧪 Testing setup (xUnit, Jest, Playwright)
@@ -108,7 +108,7 @@ Define your default setup in `scaffold.config.json`:
   }
 }
 ```
-Any optional flag (such as `enableAuth` or `enableEf`) removes all related files and packages when set to `false`. This means, for example, that disabling `enableAuth` leaves out every authentication package and configuration from the generated project.
+Any optional flag (such as `enableAuth` or `enableEf`) removes all related files and packages when set to `false`. For instance, with `enableAuth: false` there will be no authentication configuration or dependencies anywhere in the generated project.
 
 
 Set the environment variable `REACT_APP_ENABLE_AUTH=true` in the React app to toggle authentication.
@@ -116,6 +116,14 @@ Set the environment variable `REACT_APP_ENABLE_AUTH=true` in the React app to to
 Then run:
 ```bash
 npx internal-scaffold init --config scaffold.config.json
+```
+
+A set of ready-to-use configuration files covering common backend, frontend,
+and database combinations lives in the `configs/` directory. You can pass any of
+these files directly to the CLI:
+
+```bash
+npx internal-scaffold init --config configs/dotnet-react-sqlserver.json
 ```
 
 ---
