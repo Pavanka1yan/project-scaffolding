@@ -1,73 +1,69 @@
 # Internal Project Scaffolding Tool
 
-[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://your-username.github.io/project-scaffolding/)
+The Internal Project Scaffolding Tool bootstraps new projects with a consistent folder structure, sample code and optional integrations. It can be used directly from the command line or through the provided VS Code extension.
 
-## 📦 Overview
+## Getting Started
 
-The Internal Project Scaffolding Tool is designed to bootstrap internal application projects with minimal effort and maximum consistency. It provides a guided, config-driven experience to generate complete project structures, including backend, frontend, and DevOps components — all tailored to your choices.
+### Using the CLI
 
-This tool helps teams quickly set up new projects by automating:
-- Authentication & Authorization
-- Database integration
-- API layers and routing (REST or GraphQL)
-- UI framework setup (React + Tailwind)
-- CI/CD pipelines
-- Environment configurations
-- Linting and formatting rules
-- Code structure based on selected architecture (e.g., Clean, Onion, DDD)
-
----
-
-## 🧠 Features
-
-- 📋 CLI-based or Web UI setup
-- 📁 Auto-generated folder structures (via `generateStructure`)
-- 🔐 Auth (MSAL, OAuth2, custom)
-- 🗃️ DB setup (SQL Server, Postgres, MongoDB)
-- 🧱 Architecture patterns (Layered, Clean, Onion, DDD)
-- ⚙️ Optional services (Hangfire, Swagger, Health checks, etc.)
-- 🌐 REST or GraphQL API templates
-- 🌐 Typed HTTP clients with Refit ([example](docs/refit-http-clients.md))
-- 📖 GraphQL setup ([guide](docs/graphql-dotnet-react.md))
-- 📦 Package.json, Dockerfile, `.editorconfig`, `.gitignore`
-- 🚀 Azure DevOps/GitHub Actions CI templates
-- 🧪 Testing setup (xUnit, Jest, Playwright)
-- 🎨 UI with ShadCN + TailwindCSS (React Frontend)
-
-### Architecture Templates
-
-This scaffold includes template sets for **Clean**, **Layered**, **Onion**, and **DDD** architectures. Each architecture provides compatible backend and frontend folders under `templates/<architecture>`.
-
----
-
-## 🛠️ Usage
-
-### Option 1: CLI Tool
+Run the generator with `npx` and follow the prompts:
 
 ```bash
 npx internal-scaffold init
 ```
 
-You will be prompted for:
-1. Project Name
-2. Backend Tech (e.g., .NET 8, Node.js)
-3. Frontend Tech (e.g., React, Blazor)
-4. Database (SQL Server, Postgres, MongoDB)
-5. Auth Type
-6. Architecture Pattern
-7. Optional Features
+You will be asked for:
 
-### Option 2: VS Code Extension
+1. **Project name**
+2. **Backend framework** (\*.NET 8\* or \*Node.js\*)
+3. **Frontend framework** (\*React\* or \*Blazor\*)
+4. **Database** (SQL Server, Postgres or MongoDB)
+5. **API style** (REST or GraphQL)
+6. **Architecture pattern** (Clean, Layered, Onion, DDD)
+7. **Optional features** such as authentication, Entity Framework, typed HTTP clients, Swagger and CORS
 
-1. Install the extension from the `vscode-extension` folder using `vsce package` or by loading it as an extension during development.
-2. Run the command **Create Internal Project** from the command palette.
-3. Follow the interactive prompts to select the backend, frontend, database and optional features.
-4. The extension generates a temporary config file and runs the CLI in a terminal window.
+To use a configuration file:
 
+```bash
+npx internal-scaffold init --config path/to/config.json
+```
 
----
+A typical config looks like:
 
-## 🧾 Output Example
+```json
+{
+  "projectName": "sample-app",
+  "backend": "dotnet",
+  "frontend": "react",
+  "database": "sqlserver",
+  "architecture": "clean",
+  "enableAuth": true,
+  "enableEf": true,
+  "enableSwagger": true
+}
+```
+
+### Presets
+
+Pass the `--preset` option to load one of the JSON files in the `presets/` directory:
+
+```bash
+npx internal-scaffold init --preset react-admin
+```
+
+### VS Code Extension
+
+A companion extension is located in the `vscode-extension/` folder. Build it with:
+
+```bash
+cd vscode-extension
+npm install
+npm run compile
+```
+
+Package the extension using `vsce package` and install the resulting `.vsix` file. Run **Create Internal Project** from the command palette and the extension will collect your options, create a temporary config file and invoke the CLI in a terminal.
+
+### Output Example
 
 ```
 /MyApp
@@ -90,68 +86,8 @@ You will be prompted for:
   README.md
 ```
 
----
-
-## 📐 Config-Driven Approach
-
-Define your default setup in `scaffold.config.json`:
-
-```json
-{
-  "projectName": "TalentHub",
-  "frontend": "React",
-  "backend": ".NET 8",
-  "database": "SQL Server",
-  "apiType": "rest",
-  "auth": "MSAL",
-  "enableAuth": true,
-  "enableEf": true,
-  "enableHttpClients": true,
-  "architecture": "Clean",
-  "features": ["Hangfire", "Swagger", "HealthCheck"],
-  "serviceUrls": {
-    "MyApi": "https://example.com"
-  }
-}
-```
-Any optional flag (such as `enableAuth` or `enableEf`) removes all related files and packages when set to `false`. For instance, with `enableAuth: false` there will be no authentication configuration or dependencies anywhere in the generated project.
-
-
-Set the environment variable `REACT_APP_ENABLE_AUTH=true` in the React app to toggle authentication.
-
-Then run:
-```bash
-npx internal-scaffold init --config scaffold.config.json
-```
-
-A set of ready-to-use configuration files covering common backend, frontend,
-and database combinations lives in the `configs/` directory. You can pass any of
-these files directly to the CLI:
-
-```bash
-npx internal-scaffold init --config configs/dotnet-react-sqlserver.json
-```
+The `configs/` directory contains additional ready‑made configuration files for common combinations of backend, frontend and database.
 
 ---
 
-## 💡 Future Roadmap
-
-The repository already ships with a VS Code extension found in `vscode-extension/`.
-Use it for an interactive scaffolding experience directly inside the editor.
-- Plugin system for custom features
-- Enterprise boilerplate templates
-- AI assistant (via Codex) for feature guidance
-
----
-
-## 📄 GitHub Pages Setup
-
-This repository includes a workflow that publishes the contents of the `docs` directory to GitHub Pages. Make sure Pages is enabled for the repo or set `enablement: true` in `.github/workflows/pages.yml` so the workflow can enable it automatically.
-
----
-
-## 🔐 Internal Usage Only
-
-This is an internal tool for rapid scaffolding and prototyping across teams. It is not intended for public use.
-
-> Built with ❤️ by the Developer Experience Team
+Built with ❤️ by the Developer Experience Team
