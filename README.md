@@ -109,6 +109,14 @@ Then run:
 npx internal-scaffold init --config scaffold.config.json
 ```
 
+A set of ready-to-use configuration files covering common backend, frontend,
+and database combinations lives in the `configs/` directory. You can pass any of
+these files directly to the CLI:
+
+```bash
+npx internal-scaffold init --config configs/dotnet-react-sqlserver.json
+```
+
 ---
 
 ## 💡 Future Roadmap

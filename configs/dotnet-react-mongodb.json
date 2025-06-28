@@ -1,0 +1,11 @@
+{
+  "projectName": "sample-app",
+  "backend": "dotnet",
+  "frontend": "react",
+  "database": "mongodb",
+  "auth": "MSAL",
+  "enableAuth": true,
+  "enableEf": true,
+  "enableHttpClients": true,
+  "architecture": "clean"
+}
