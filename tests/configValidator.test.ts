@@ -16,6 +16,7 @@ describe('validateConfig', () => {
     expect(result.enableHttpClients).toBe(false);
     expect(result.enableSwagger).toBe(false);
     expect(result.enableCors).toBe(false);
+    expect(result.plugins).toEqual([]);
   });
 
   it('throws if required fields missing', () => {

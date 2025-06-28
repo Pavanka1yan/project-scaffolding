@@ -63,6 +63,18 @@ npm run compile
 
 Package the extension using `vsce package` and install the resulting `.vsix` file. Run **Create Internal Project** from the command palette and the extension will collect your options, create a temporary config file and invoke the CLI in a terminal.
 
+### Plugins
+
+Custom functionality can be added through small Node modules. A plugin exports an `apply(scaffoldContext)` function and can modify templates or create extra files. Reference plugins in `scaffold.config.json` or under `internalScaffold.plugins` in your `package.json`:
+
+```json
+{
+  "plugins": ["./plugins/logger"]
+}
+```
+
+Each plugin receives a context object containing the validated configuration and project directory so it can extend the generated output.
+
 ### Output Example
 
 ```
