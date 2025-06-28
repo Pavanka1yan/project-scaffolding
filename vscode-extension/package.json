@@ -1,0 +1,30 @@
+{
+  "name": "internal-scaffold-extension",
+  "displayName": "Internal Project Scaffolding",
+  "description": "VS Code extension to generate projects using internal-scaffold CLI",
+  "version": "0.0.1",
+  "publisher": "internal",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "main": "./dist/extension.js",
+  "scripts": {
+    "compile": "tsc -p ./"
+  },
+  "activationEvents": [
+    "onCommand:internalScaffold.createProject"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "internalScaffold.createProject",
+        "title": "Create Internal Project"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.74.0",
+    "typescript": "^5.0.4"
+  }
+}
