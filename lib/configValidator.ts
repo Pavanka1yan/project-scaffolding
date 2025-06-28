@@ -28,7 +28,8 @@ export interface ValidatedConfig {
   enableCors: boolean;
 }
 
-const allowedArchitectures = ["clean", "layered"];
+// supported architecture patterns for project generation
+const allowedArchitectures = ["clean", "layered", "onion", "ddd"];
 const allowedApiTypes = ["rest", "graphql"];
 
 export function validateConfig(config: ScaffoldConfig): ValidatedConfig {

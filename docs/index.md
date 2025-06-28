@@ -23,7 +23,7 @@ This tool helps teams quickly set up new projects by automating:
 - CI/CD pipelines
 - Environment configurations
 - Linting and formatting rules
-- Code structure based on selected architecture (e.g., Clean Architecture, Onion Architecture, etc.)
+- Code structure based on selected architecture (e.g., Clean, Onion, DDD)
 
 ---
 
@@ -33,7 +33,7 @@ This tool helps teams quickly set up new projects by automating:
 - 📁 Auto-generated folder structures (via `generateStructure`)
 - 🔐 Auth (MSAL, OAuth2, custom)
 - 🗃️ DB setup (SQL Server, Postgres, MongoDB)
-- 🧱 Architecture patterns (Layered, DDD, Microservice-ready)
+- 🧱 Architecture patterns (Layered, Clean, Onion, DDD)
 - ⚙️ Optional services (Hangfire, Swagger, Health checks, etc.)
 - 🌐 REST or GraphQL API templates
 - 🌐 Typed HTTP clients with Refit ([example](docs/refit-http-clients.md))
@@ -42,6 +42,10 @@ This tool helps teams quickly set up new projects by automating:
 - 🚀 Azure DevOps/GitHub Actions CI templates
 - 🧪 Testing setup (xUnit, Jest, Playwright)
 - 🎨 UI with ShadCN + TailwindCSS (React Frontend)
+
+### Architecture Templates
+
+This scaffold includes template sets for **Clean**, **Layered**, **Onion**, and **DDD** architectures. Each architecture provides compatible backend and frontend folders under `templates/<architecture>`.
 
 ---
 
