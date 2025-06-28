@@ -51,6 +51,12 @@ async function scaffoldProject(options) {
       },
       {
         type: 'input',
+        name: 'apiType',
+        message: 'API type (rest/graphql):',
+        default: config.apiType || 'rest',
+      },
+      {
+        type: 'input',
         name: 'architecture',
         message: 'Architecture pattern:',
         default: config.architecture || 'layered',
