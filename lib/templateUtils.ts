@@ -1,11 +1,9 @@
 import fs from 'fs';
 import path from 'path';
+import ejs from 'ejs';
 
-export function replacePlaceholders(content: string, variables: Record<string, string>): string {
-  return content.replace(/\{\{(.*?)\}\}/g, (_, key: string) => {
-    const k = key.trim();
-    return Object.prototype.hasOwnProperty.call(variables, k) ? variables[k] : '';
-  });
+export function renderTemplate(content: string, variables: Record<string, string>): string {
+  return ejs.render(content, variables);
 }
 
 export async function copyTemplates(templateDir: string, destDir: string, variables: Record<string, string> = {}): Promise<void> {
@@ -18,7 +16,7 @@ export async function copyTemplates(templateDir: string, destDir: string, variab
       await copyTemplates(srcPath, destPath, variables);
     } else {
       let content = await fs.promises.readFile(srcPath, 'utf-8');
-      content = replacePlaceholders(content, variables);
+      content = renderTemplate(content, variables);
       await fs.promises.mkdir(path.dirname(destPath), { recursive: true });
       await fs.promises.writeFile(destPath, content);
     }
