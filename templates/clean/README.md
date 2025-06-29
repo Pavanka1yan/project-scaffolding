@@ -1,3 +1,3 @@
-# {{projectName}}
+# <%= projectName %>
 
-This project follows the Clean architecture and uses {{database}} as the database.
+This project follows the Clean architecture and uses <%= database %> as the database.

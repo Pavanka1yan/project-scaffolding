@@ -1,3 +1,3 @@
-# {{projectName}}
+# <%= projectName %>
 
-This project is organized using Domain-Driven Design (DDD) and uses {{database}} as the database.
+This project is organized using Domain-Driven Design (DDD) and uses <%= database %> as the database.

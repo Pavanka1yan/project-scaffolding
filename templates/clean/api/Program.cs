@@ -29,7 +29,7 @@ if (enableEf)
 {
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     builder.Services.AddDbContext<AppDbContext>(options =>
-        options.{{efProvider}}(connectionString));
+        options.<%= efProvider %>(connectionString));
     builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 }
 
